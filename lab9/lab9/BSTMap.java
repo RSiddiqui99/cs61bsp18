@@ -52,8 +52,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
 
     private void addToEmptyTree (K key, V value)
     {
-        root.key=key;
-        root.value=value;
+        root=new Node(key,value);
 
     }
 
@@ -86,6 +85,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     {
         return getHelper(key,root);
     }
+
+
 
     /** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.
      * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).
