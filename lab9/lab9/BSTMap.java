@@ -122,6 +122,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
         if (size==0)
         {
             addToEmptyTree(key,value);
+            size++;
             return;
         }
 
@@ -166,5 +167,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     public Iterator<K> iterator() {
         throw new UnsupportedOperationException();
     }
+
+
 
 }
