@@ -32,11 +32,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     private int size; /* The number of key-value pairs in the tree */
 
     /* Creates an empty BSTMap. */
+
     public BSTMap()
     {
         this.clear();
     }
-
 
     /* Removes all of the mappings from this map. */
     @Override
@@ -49,6 +49,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     /** Returns the value mapped to by KEY in the subtree rooted in P.
      *  or null if this map contains no mapping for the key.
      */
+
+    private void addToEmptyTree (K key, V value)
+    {
+        root.key=key;
+        root.value=value;
+
+    }
+
     private V getHelper(K key, Node p)
     {
         if (p==null)
@@ -111,6 +119,12 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     @Override
     public void put(K key, V value)
     {
+        if (size==0)
+        {
+            addToEmptyTree(key,value);
+            return;
+        }
+
         putHelper(key,value,root);
     }
 
@@ -152,4 +166,5 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V>
     public Iterator<K> iterator() {
         throw new UnsupportedOperationException();
     }
+
 }
