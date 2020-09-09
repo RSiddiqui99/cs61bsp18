@@ -121,6 +121,8 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T>
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
+        if (index == 1) return;
+
         if (min(index,parentIndex(index))==index)
         {
             swap(index,parentIndex(index));
@@ -136,10 +138,16 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T>
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        if (min(index,leftIndex(index))!=index || min(index,rightIndex(index))!=index)
+        if (getNode(leftIndex(index))==null && getNode(rightIndex(index))==null)
         {
+            return;
+        }
+
+        else if (min(index,leftIndex(index))!=index || min(index,rightIndex(index))!=index)
+        {
+            int temp=min(leftIndex(index),rightIndex(index));
             swap(index,min(leftIndex(index),rightIndex(index)));
-            sink(min(leftIndex(index),rightIndex(index)));
+            sink(temp);
         }
 
     }
@@ -157,9 +165,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T>
             resize(contents.length * 2);
         }
 
-        contents[size+1]=new Node(item,priority);
-        swim(size+1);
-        size++;
+        size++; //why does using 'size+1' not work?
+        contents[size]=new Node(item,priority);
+        swim(size);
     }
 
     /**
@@ -188,6 +196,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T>
         swap(1,size);
         contents[size]=null;
         sink(1);
+        size--;
 
         return temp.item();
     }
